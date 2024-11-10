@@ -19,8 +19,7 @@ const SaleCard = ({ imageUrl, title, description, author, condition, bookId, sho
     }
     else showAlert(json.message, 'danger');
   };
-
-  console.log(requestedBy);
+  
   return (
     <div className="bg-blue-900 bg-opacity-80 rounded-lg shadow-lg w-56 h-96 m-4 overflow-hidden text-white font-sans flex flex-col transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
       <img src={imageUrl} alt={title} className="w-full h-44 object-cover" />
@@ -38,7 +37,7 @@ const SaleCard = ({ imageUrl, title, description, author, condition, bookId, sho
             isPressed ? 'scale-95 bg-blue-300' : 'hover:bg-gray-200'
           }`}
         >
-        {(requestedBy!=null)?"Request":"Unavalibale"}
+        {(requestedBy==null)?"Request":"Unavailabale"}
         </button>
       </div>
     </div>

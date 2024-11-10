@@ -14,6 +14,7 @@ import BookHome from './components/BookHome';
 import UserProfile from './components/UserProfile';
 import ResetPassword from './components/ResetPassword';
 import BookForSale from './components/BookForSale';
+import BookSearch from './components/BookSearch';
 
 export default function App() {
   const [alert,setAlert] = React.useState(null);
@@ -64,6 +65,7 @@ export default function App() {
        <Route exact path="/userProfile" element = {<UserProfile showAlert = {showAlert}/>} />
        <Route exact path="/bookHome" element = {<BookHome showAlert = {showAlert}/>} />
        <Route exact path="/bookForSale" element = {<BookForSale showAlert = {showAlert}/>} />
+       <Route exact path="/searchBook" element = {<BookSearch showAlert = {showAlert}/>} />
 
       </Routes>
       </div>
