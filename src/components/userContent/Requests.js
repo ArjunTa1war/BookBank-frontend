@@ -4,6 +4,7 @@ import RequestCard from '../helper/RequestCard';
 
 export default function Requests(props) {
   const [requests,setRequests] = React.useState([]);
+  const [triggerFetch, setTriggerFetch] = useState(false);
   const host = process.env.REACT_APP_PORT;
 
   useEffect(() => {
@@ -26,17 +27,36 @@ export default function Requests(props) {
       }
     };
     fetchUserRequests();
-  }, [host]);
+  }, [triggerFetch]);
 
 
-  const handleApprove = (requestId) => {
-    // Handle approval logic here
-    console.log("Approved request:", requestId);
+  const handleApprove = async(request) => {
+    console.log("i was approved");
+    const response = await fetch(`${host}/book/grantRequest`, {
+      method:"post",
+      headers: {
+         'Content-Type': "application/json",
+          "auth-token": localStorage.getItem('token'),
+      },
+      body:JSON.stringify({bookId:request._id,owner:request.owner,newOwner:request.requestedBy})
+    });
+    const json = await response.json();
+    setTriggerFetch(prev => !prev)
+    console.log(json);
   };
 
-  const handleDisapprove = (requestId) => {
-    // Handle disapproval logic here
-    console.log("Disapproved request:", requestId);
+  const handleDisapprove = async(request) => {
+    const response = await fetch(`${host}/book/rejectRequests`, {
+      method:"post",
+      headers: {
+        'Content-Type': "application/json",
+          "auth-token": localStorage.getItem('token'),
+      },
+      body:JSON.stringify({bookId:request._id,owner:request.owner,newOwner:request.requestedBy})
+    });
+    const json = await response.json();
+    setTriggerFetch(prev => !prev)
+    console.log(json);
   };
 
 

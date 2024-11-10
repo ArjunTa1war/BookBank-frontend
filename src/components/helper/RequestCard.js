@@ -22,20 +22,22 @@ function RequestCard({ request, onApprove, onDisapprove }) {
         </div>
 
         {/* Approve and Disapprove Buttons */}
-        <div className="flex gap-2 mt-4">
+        {!request.completed&&<div className="flex gap-2 mt-4">    
           <button
-            onClick={() => onApprove(request._id)}
+            onClick={() => onApprove(request.bookId)}
             className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
           >
             Approve
           </button>
           <button
-            onClick={() => onDisapprove(request._id)}
+            onClick={() => onDisapprove(request.bookId)}
             className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
           >
             Disapprove
           </button>
-        </div>
+        </div>}
+
+        {request.completed && <p>completed</p>}
       </div>
     </div>
   );
